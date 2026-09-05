@@ -6,8 +6,6 @@ import { siteUrl } from "@/lib/site";
 
 type ProjectPageProps = { params: Promise<{ slug: string }> };
 
-export const dynamicParams = false;
-
 export function generateStaticParams() {
   return portfolio.projects.map(({ slug }) => ({ slug }));
 }
