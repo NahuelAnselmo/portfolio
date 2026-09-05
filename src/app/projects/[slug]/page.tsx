@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { portfolio } from "@/data/portfolio";
+import { siteUrl } from "@/lib/site";
 
 type ProjectPageProps = { params: Promise<{ slug: string }> };
 
@@ -20,6 +21,16 @@ export async function generateMetadata({
   return {
     title: `${project.title} | ${portfolio.name}`,
     description: project.description,
+    alternates: siteUrl
+      ? { canonical: `/projects/${project.slug}` }
+      : undefined,
+    openGraph: {
+      type: "article",
+      locale: "es_AR",
+      siteName: portfolio.name,
+      title: project.title,
+      description: project.description,
+    },
   };
 }
 

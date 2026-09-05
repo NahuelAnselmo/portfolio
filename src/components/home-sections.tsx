@@ -55,7 +55,7 @@ export function About() {
         <SectionHeading
           id="about-title"
           number="01"
-          label="Sobre mí"
+          label={about.label}
           title={about.title}
         />
         <div className="space-y-5">
@@ -96,7 +96,7 @@ export function Skills() {
         <SectionHeading
           id="skills-title"
           number="02"
-          label="Tecnologías"
+          label={skills.label}
           title={skills.title}
           intro={skills.intro}
         />
@@ -129,7 +129,7 @@ export function Projects() {
       <SectionHeading
         id="projects-title"
         number="03"
-        label="Proyectos"
+        label={portfolio.projectsSection.label}
         title={portfolio.projectsSection.title}
         intro={portfolio.projectsSection.intro}
       />
@@ -154,7 +154,7 @@ export function Experience() {
         <SectionHeading
           id="experience-title"
           number="04"
-          label="Experiencia"
+          label={experience.label}
           title={experience.title}
           intro={experience.intro}
         />
@@ -203,7 +203,7 @@ export function Contact() {
     >
       <div className="container">
         <p className="eyebrow">
-          <span aria-hidden="true">05 /</span> Contacto
+          <span aria-hidden="true">05 /</span> {contact.label}
         </p>
         <h2 id="contact-title" className="contact-title whitespace-pre-line">
           {contact.title}

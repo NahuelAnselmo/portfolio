@@ -50,12 +50,14 @@ type PortfolioContent = {
     secondary: string;
   };
   about: {
+    label: string;
     title: string;
     intro: string;
     paragraphs: readonly string[];
     principles: readonly { title: string; body: string }[];
   };
   skills: {
+    label: string;
     title: string;
     intro: string;
     items: readonly {
@@ -65,9 +67,10 @@ type PortfolioContent = {
       mark: string;
     }[];
   };
-  projectsSection: { title: string; intro: string };
+  projectsSection: { label: string; title: string; intro: string };
   projects: readonly Project[];
   experience: {
+    label: string;
     title: string;
     intro: string;
     emptyTitle: string;
@@ -75,6 +78,7 @@ type PortfolioContent = {
     items: readonly Experience[];
   };
   contact: {
+    label: string;
     title: string;
     body: string;
     email?: string;
@@ -123,6 +127,7 @@ export const portfolio: PortfolioContent = {
     secondary: "Conocerme mejor",
   },
   about: {
+    label: "Sobre mí",
     title: "Detrás del código,\nuna forma de pensar.",
     intro:
       "Me interesa tanto cómo funciona una aplicación como la experiencia de quien la usa.",
@@ -146,6 +151,7 @@ export const portfolio: PortfolioContent = {
     ],
   },
   skills: {
+    label: "Tecnologías",
     title: "Mi caja de herramientas.",
     intro: "Un stack enfocado en desarrollar experiencias web modernas.",
     items: [
@@ -200,6 +206,7 @@ export const portfolio: PortfolioContent = {
     ],
   },
   projectsSection: {
+    label: "Proyectos",
     title: "Del concepto\na la implementación.",
     intro:
       "Una mirada al código, al proceso y a las decisiones detrás de cada proyecto.",
@@ -234,8 +241,8 @@ export const portfolio: PortfolioContent = {
           body: "La API incorpora JWT para autenticación y esquemas Zod para validación. Esta separación entre rutas, controladores, modelos y middlewares permite recorrer el flujo de una petición de manera clara.",
         },
         {
-          title: "Alcance de esta presentación",
-          body: "El caso de estudio describe la implementación disponible en los repositorios públicos. No se presenta como un servicio comercial ni se publican métricas de uso o una demo desplegada.",
+          title: "Explorar el código",
+          body: "Los repositorios permiten explorar el recorrido completo: desde el formulario de una tarea hasta su validación y persistencia. El código del cliente y del servidor está disponible para revisar la implementación.",
         },
       ],
     },
@@ -268,8 +275,8 @@ export const portfolio: PortfolioContent = {
           body: "Participé junto a Mario Arroyo y Santiago Altamiranda. Las funcionalidades descritas corresponden al proyecto colectivo; el README de ambos repositorios identifica al equipo.",
         },
         {
-          title: "Alcance de esta presentación",
-          body: "Los enlaces permiten revisar el código del frontend y del backend. Esta presentación no atribuye resultados comerciales ni muestra una demo de producción.",
+          title: "Explorar el código",
+          body: "Los repositorios del frontend y del backend permiten recorrer las pantallas, el manejo del carrito y las rutas de la API. Los README documentan las funcionalidades y las instrucciones de ejecución.",
         },
       ],
     },
@@ -308,6 +315,7 @@ export const portfolio: PortfolioContent = {
     },
   ],
   experience: {
+    label: "Experiencia",
     title: "Aprender. Construir.\nSeguir creciendo.",
     intro: "Formación y experiencia práctica en proyectos de desarrollo web.",
     emptyTitle: "Próximamente, más sobre mi recorrido.",
@@ -333,6 +341,7 @@ export const portfolio: PortfolioContent = {
     ],
   },
   contact: {
+    label: "Contacto",
     title: "Toda buena idea empieza\ncon una conversación.",
     body: "¿Querés conversar sobre una oportunidad o un proyecto? Escribime y contame de qué se trata.",
     email: "nahuelanselmo63t@gmail.com",
