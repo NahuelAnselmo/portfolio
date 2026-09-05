@@ -6,6 +6,8 @@ export type Project = {
   description: string;
   technologies: readonly string[];
   repository: string;
+  backendRepository?: string;
+  tone: "sage" | "sand" | "slate";
   demo?: string;
   caseStudy: readonly { title: string; body: string }[];
 };
@@ -25,17 +27,60 @@ type PortfolioContent = {
   description: string;
   navigation: readonly { href: string; label: string }[];
   labels: {
-    skip: string; menu: string; closeMenu: string; navigation: string;
-    home: string; viewProject: string; repository: string; demo: string;
-    back: string; stack: string; footer: string;
+    skip: string;
+    menu: string;
+    closeMenu: string;
+    navigation: string;
+    home: string;
+    viewProject: string;
+    repository: string;
+    demo: string;
+    back: string;
+    stack: string;
+    footer: string;
+    backend: string;
+    signature: string;
   };
-  hero: { eyebrow: string; title: string; accent: string; body: string; primary: string; secondary: string };
-  about: { title: string; intro: string; paragraphs: readonly string[]; principles: readonly { title: string; body: string }[] };
-  skills: { title: string; intro: string; items: readonly { name: string; category: string; description: string; mark: string }[] };
+  hero: {
+    eyebrow: string;
+    title: string;
+    accent: string;
+    body: string;
+    primary: string;
+    secondary: string;
+  };
+  about: {
+    title: string;
+    intro: string;
+    paragraphs: readonly string[];
+    principles: readonly { title: string; body: string }[];
+  };
+  skills: {
+    title: string;
+    intro: string;
+    items: readonly {
+      name: string;
+      category: string;
+      description: string;
+      mark: string;
+    }[];
+  };
   projectsSection: { title: string; intro: string };
   projects: readonly Project[];
-  experience: { title: string; intro: string; emptyTitle: string; emptyBody: string; items: readonly Experience[] };
-  contact: { title: string; body: string; email?: string; emailLabel: string; links: readonly { label: string; href: string }[] };
+  experience: {
+    title: string;
+    intro: string;
+    emptyTitle: string;
+    emptyBody: string;
+    items: readonly Experience[];
+  };
+  contact: {
+    title: string;
+    body: string;
+    email?: string;
+    emailLabel: string;
+    links: readonly { label: string; href: string }[];
+  };
   notFound: { title: string; body: string; action: string };
 };
 
@@ -45,7 +90,8 @@ export const portfolio: PortfolioContent = {
   locale: "es",
   name: "Nahuel Anselmo",
   role: "Full Stack Web Developer",
-  description: "Portfolio profesional de Nahuel Anselmo. Desarrollo web con Next.js, React, TypeScript y Tailwind CSS.",
+  description:
+    "Portfolio profesional de Nahuel Anselmo. Desarrollo web con Next.js, React, TypeScript y Tailwind CSS.",
   navigation: [
     { href: "/#sobre-mi", label: "Sobre mí" },
     { href: "/#tecnologias", label: "Tecnologías" },
@@ -54,65 +100,251 @@ export const portfolio: PortfolioContent = {
     { href: "/#contacto", label: "Contacto" },
   ],
   labels: {
-    skip: "Saltar al contenido", menu: "Abrir menú", closeMenu: "Cerrar menú",
-    navigation: "Navegación principal", home: "Nahuel Anselmo — inicio",
-    viewProject: "Explorar proyecto", repository: "Ver código", demo: "Ver demo",
-    back: "Volver a proyectos", stack: "Tecnologías del proyecto",
+    skip: "Saltar al contenido",
+    menu: "Abrir menú",
+    closeMenu: "Cerrar menú",
+    navigation: "Navegación principal",
+    home: "Nahuel Anselmo — inicio",
+    viewProject: "Explorar proyecto",
+    repository: "Ver código",
+    demo: "Ver demo",
+    back: "Volver a proyectos",
+    stack: "Tecnologías del proyecto",
     footer: "Diseñado con intención. Construido para la web.",
+    backend: "Código del backend",
+    signature: "DISEÑO CON INTENCIÓN / CÓDIGO CON CRITERIO",
   },
   hero: {
     eyebrow: "DESARROLLO WEB · PORTFOLIO PERSONAL",
-    title: "Ideas claras.", accent: "Experiencias que funcionan.",
-    body: "Soy Nahuel Anselmo, Full Stack Web Developer. Mi foco está en construir aplicaciones web útiles, accesibles y cuidadas en cada detalle.",
-    primary: "Ver proyectos", secondary: "Conocerme mejor",
+    title: "Ideas claras.",
+    accent: "Experiencias que funcionan.",
+    body: "Soy Nahuel Anselmo, Full Stack Web Developer. Desarrollo aplicaciones con React, Node.js y MongoDB, y sigo ampliando mi stack con Next.js y TypeScript.",
+    primary: "Ver proyectos",
+    secondary: "Conocerme mejor",
   },
   about: {
     title: "Detrás del código,\nuna forma de pensar.",
-    intro: "Me interesa tanto cómo funciona una aplicación como la experiencia de quien la usa.",
+    intro:
+      "Me interesa tanto cómo funciona una aplicación como la experiencia de quien la usa.",
     paragraphs: [
-      "Mi stack principal es Next.js, React, TypeScript y Tailwind CSS. Busco combinar una interfaz clara con una base técnica que pueda crecer y mantenerse en el tiempo.",
-      "Este portfolio es parte de ese proceso: un espacio para presentar lo que construyo, explicar mis decisiones y compartir mi evolución como desarrollador.",
+      "Me formé en Desarrollo Web Full Stack en RollingCode School. A través de proyectos individuales y en equipo trabajé con interfaces en React, APIs en Node.js y Express, autenticación y persistencia en MongoDB.",
+      "Mis proyectos incluyen un gestor de tareas y una aplicación de pedidos para gastronomía. Hoy sigo profundizando en Next.js, TypeScript y Tailwind CSS, con foco en escribir código mantenible y construir experiencias claras para quienes las usan.",
     ],
     principles: [
-      { title: "Claridad", body: "Código legible y decisiones que se pueden explicar." },
-      { title: "Cuidado", body: "Accesibilidad, adaptación y atención al detalle." },
-      { title: "Evolución", body: "Aprender, revisar y mejorar con cada proyecto." },
+      {
+        title: "Claridad",
+        body: "Código legible y decisiones que se pueden explicar.",
+      },
+      {
+        title: "Cuidado",
+        body: "Accesibilidad, adaptación y atención al detalle.",
+      },
+      {
+        title: "Evolución",
+        body: "Aprender, revisar y mejorar con cada proyecto.",
+      },
     ],
   },
   skills: {
-    title: "Mi caja de herramientas.", intro: "Un stack enfocado en desarrollar experiencias web modernas.",
+    title: "Mi caja de herramientas.",
+    intro: "Un stack enfocado en desarrollar experiencias web modernas.",
     items: [
-      { name: "Next.js", category: "FRAMEWORK", description: "Rutas, renderizado y estructura de aplicación.", mark: "N" },
-      { name: "React", category: "INTERFACES", description: "Composición de componentes e interactividad.", mark: "Re" },
-      { name: "TypeScript", category: "LENGUAJE", description: "Contratos claros y tipos para trabajar con confianza.", mark: "Ts" },
-      { name: "Tailwind CSS", category: "ESTILOS", description: "Diseño consistente y adaptable a cada pantalla.", mark: "Tw" },
+      {
+        name: "Next.js",
+        category: "FRAMEWORK",
+        description: "Rutas, renderizado y estructura de aplicación.",
+        mark: "N",
+      },
+      {
+        name: "React",
+        category: "INTERFACES",
+        description: "Composición de componentes e interactividad.",
+        mark: "Re",
+      },
+      {
+        name: "TypeScript",
+        category: "LENGUAJE",
+        description: "Contratos claros y tipos para trabajar con confianza.",
+        mark: "Ts",
+      },
+      {
+        name: "Tailwind CSS",
+        category: "ESTILOS",
+        description: "Diseño consistente y adaptable a cada pantalla.",
+        mark: "Tw",
+      },
+      {
+        name: "Node.js",
+        category: "BACKEND",
+        description: "Desarrollo de servidores y lógica de aplicación.",
+        mark: "No",
+      },
+      {
+        name: "Express",
+        category: "API REST",
+        description: "Rutas, controladores y middlewares del servidor.",
+        mark: "Ex",
+      },
+      {
+        name: "MongoDB",
+        category: "BASE DE DATOS",
+        description: "Persistencia de usuarios, tareas y productos.",
+        mark: "Mo",
+      },
+      {
+        name: "Git y GitHub",
+        category: "COLABORACIÓN",
+        description: "Control de versiones y proyectos compartidos.",
+        mark: "Git",
+      },
     ],
   },
-  projectsSection: { title: "Del concepto\na la implementación.", intro: "Una mirada al código, al proceso y a las decisiones detrás de cada proyecto." },
-  projects: [{
-    slug: "portfolio-profesional", title: "Portfolio profesional", category: "DESARROLLO WEB", status: "En desarrollo",
-    description: "Un espacio propio para presentar proyectos y decisiones técnicas, construido con una arquitectura sencilla y una experiencia accesible.",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    repository: "https://github.com/NahuelAnselmo/portfolio",
-    caseStudy: [
-      { title: "El punto de partida", body: "Crear una presentación profesional que permita conocer mi perfil y explorar proyectos durante una búsqueda laboral o una entrevista técnica." },
-      { title: "La arquitectura", body: "App Router organiza las rutas. Los datos tipados y los textos en español viven separados de la presentación, preparando la incorporación de otro idioma sin duplicar componentes." },
-      { title: "Las decisiones", body: "Las secciones se renderizan como Server Components. El menú móvil concentra la interacción del cliente. El contenido local versionado evita sumar infraestructura que esta primera versión no necesita." },
-      { title: "La experiencia", body: "El diseño parte de pantallas pequeñas, mantiene una jerarquía de lectura clara y contempla navegación por teclado, foco visible y preferencias de movimiento reducido." },
-      { title: "Lo que sigue", body: "Completar el contenido profesional, incorporar más casos de estudio y preparar una versión en inglés. El proyecto continúa en desarrollo; todavía no hay métricas de uso publicadas." },
-    ],
-  }],
+  projectsSection: {
+    title: "Del concepto\na la implementación.",
+    intro:
+      "Una mirada al código, al proceso y a las decisiones detrás de cada proyecto.",
+  },
+  projects: [
+    {
+      slug: "gestor-de-tareas",
+      title: "Gestor de tareas",
+      category: "APLICACIÓN FULL STACK",
+      status: "Código disponible",
+      tone: "slate",
+      description:
+        "Aplicación MERN para organizar tareas con registro, inicio de sesión y operaciones de creación, consulta, edición y eliminación asociadas a cada usuario.",
+      technologies: ["React", "Node.js", "Express", "MongoDB", "JWT"],
+      repository: "https://github.com/NahuelAnselmo/client-tasks-crud",
+      backendRepository: "https://github.com/NahuelAnselmo/server-tasks-crud",
+      caseStudy: [
+        {
+          title: "El proyecto",
+          body: "Un gestor de tareas que conecta una interfaz React con una API Express y una base de datos MongoDB. El frontend y el backend están organizados en repositorios separados.",
+        },
+        {
+          title: "La interfaz",
+          body: "React Router organiza las pantallas de registro, acceso, perfil y tareas. Los contextos separan autenticación, tareas y notificaciones; las rutas de tareas requieren una sesión en la interfaz.",
+        },
+        {
+          title: "Los datos y el acceso",
+          body: "El backend utiliza modelos de Mongoose y controladores para las operaciones CRUD. Las consultas de tareas incluyen el identificador del usuario autenticado para limitar la lectura, actualización y eliminación a sus registros.",
+        },
+        {
+          title: "Las herramientas",
+          body: "La API incorpora JWT para autenticación y esquemas Zod para validación. Esta separación entre rutas, controladores, modelos y middlewares permite recorrer el flujo de una petición de manera clara.",
+        },
+        {
+          title: "Alcance de esta presentación",
+          body: "El caso de estudio describe la implementación disponible en los repositorios públicos. No se presenta como un servicio comercial ni se publican métricas de uso o una demo desplegada.",
+        },
+      ],
+    },
+    {
+      slug: "la-cerveceria",
+      title: "La Cervecería",
+      category: "PROYECTO EN EQUIPO",
+      status: "Código disponible",
+      tone: "sand",
+      description:
+        "Aplicación de pedidos para gastronomía con catálogo, filtros, carrito y administración de productos. Desarrollada en colaboración con Mario Arroyo y Santiago Altamiranda.",
+      technologies: ["React", "Bootstrap", "Zustand", "Express", "MongoDB"],
+      repository: "https://github.com/NahuelAnselmo/LaCerveceria-Front",
+      backendRepository: "https://github.com/NahuelAnselmo/LaCerveceria-Back",
+      caseStudy: [
+        {
+          title: "La propuesta",
+          body: "Un proyecto orientado a facilitar la consulta del menú y la creación de pedidos en un establecimiento gastronómico, con una interfaz para clientes y herramientas de administración.",
+        },
+        {
+          title: "El recorrido del usuario",
+          body: "El frontend incluye registro e inicio de sesión, catálogo filtrable y un carrito que permite revisar el pedido. La administración contempla alta, edición y eliminación de productos.",
+        },
+        {
+          title: "La base técnica",
+          body: "React y React Router organizan la interfaz; Bootstrap aporta estilos y componentes, y Zustand se utiliza para el estado de sesión y carrito. El backend separa rutas, controladores, validaciones y modelos de MongoDB.",
+        },
+        {
+          title: "El trabajo compartido",
+          body: "Participé junto a Mario Arroyo y Santiago Altamiranda. Las funcionalidades descritas corresponden al proyecto colectivo; el README de ambos repositorios identifica al equipo.",
+        },
+        {
+          title: "Alcance de esta presentación",
+          body: "Los enlaces permiten revisar el código del frontend y del backend. Esta presentación no atribuye resultados comerciales ni muestra una demo de producción.",
+        },
+      ],
+    },
+    {
+      slug: "portfolio-profesional",
+      title: "Portfolio profesional",
+      category: "DESARROLLO WEB",
+      status: "En desarrollo",
+      description:
+        "Un espacio propio para presentar proyectos y decisiones técnicas, construido con una arquitectura sencilla y una experiencia accesible.",
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      repository: "https://github.com/NahuelAnselmo/portfolio",
+      tone: "sage",
+      caseStudy: [
+        {
+          title: "El punto de partida",
+          body: "Crear una presentación profesional que permita conocer mi perfil y explorar proyectos durante una búsqueda laboral o una entrevista técnica.",
+        },
+        {
+          title: "La arquitectura",
+          body: "App Router organiza las rutas. Los datos tipados y los textos en español viven separados de la presentación, preparando la incorporación de otro idioma sin duplicar componentes.",
+        },
+        {
+          title: "Las decisiones",
+          body: "Las secciones se renderizan como Server Components. El menú móvil concentra la interacción del cliente. El contenido local versionado evita sumar infraestructura que esta primera versión no necesita.",
+        },
+        {
+          title: "La experiencia",
+          body: "El diseño parte de pantallas pequeñas, mantiene una jerarquía de lectura clara y contempla navegación por teclado, foco visible y preferencias de movimiento reducido.",
+        },
+        {
+          title: "Lo que sigue",
+          body: "Completar el contenido profesional, incorporar más casos de estudio y preparar una versión en inglés. El proyecto continúa en desarrollo; todavía no hay métricas de uso publicadas.",
+        },
+      ],
+    },
+  ],
   experience: {
-    title: "Un recorrido en construcción.", intro: "Experiencia, aprendizaje y próximos pasos.",
+    title: "Aprender. Construir.\nSeguir creciendo.",
+    intro: "Formación y experiencia práctica en proyectos de desarrollo web.",
     emptyTitle: "Próximamente, más sobre mi recorrido.",
-    emptyBody: "Esta sección se está preparando. Mientras tanto, podés explorar el proceso y las decisiones del portfolio en la sección de proyectos.",
-    items: [],
+    emptyBody:
+      "Esta sección se está preparando. Mientras tanto, podés explorar el proceso y las decisiones del portfolio en la sección de proyectos.",
+    items: [
+      {
+        id: "rollingcode",
+        role: "Formación en Desarrollo Web Full Stack",
+        organization: "RollingCode School",
+        period: "2024 — 2025 · FORMACIÓN",
+        description:
+          "Desarrollo de proyectos individuales y grupales con React, Node.js y bases de datos. Práctica de APIs REST, autenticación, Git y organización de trabajo con Scrum y Trello.",
+      },
+      {
+        id: "practica",
+        role: "Desarrollo de aplicaciones web",
+        organization: "Proyectos propios y colaborativos",
+        period: "EXPERIENCIA EN PROYECTOS",
+        description:
+          "Implementación de un gestor de tareas MERN y participación en La Cervecería. Una base práctica para seguir profundizando en frontend, backend e integración de aplicaciones.",
+      },
+    ],
   },
   contact: {
     title: "Toda buena idea empieza\ncon una conversación.",
-    body: "Encontrá mi perfil y el código de mis proyectos en GitHub. Próximamente sumaré más canales de contacto profesional.",
+    body: "¿Querés conversar sobre una oportunidad o un proyecto? Escribime y contame de qué se trata.",
+    email: "nahuelanselmo63t@gmail.com",
     emailLabel: "Escribime",
-    links: [{ label: "GitHub", href: "https://github.com/NahuelAnselmo" }],
+    links: [
+      { label: "GitHub", href: "https://github.com/NahuelAnselmo" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/nahuelanselmo/" },
+    ],
   },
-  notFound: { title: "Esta página no está acá.", body: "El enlace puede haber cambiado. Volvé al portfolio para seguir explorando.", action: "Volver al inicio" },
+  notFound: {
+    title: "Esta página no está acá.",
+    body: "El enlace puede haber cambiado. Volvé al portfolio para seguir explorando.",
+    action: "Volver al inicio",
+  },
 };

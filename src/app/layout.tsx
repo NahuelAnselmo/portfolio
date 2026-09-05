@@ -8,14 +8,23 @@ export const metadata: Metadata = {
   description: portfolio.description,
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang={portfolio.locale}>
       <body>
-        <a className="skip-link" href="#contenido">{portfolio.labels.skip}</a>
+        <a className="skip-link" href="#contenido">
+          {portfolio.labels.skip}
+        </a>
         <SiteHeader />
         {children}
-        <footer className="container site-footer"><span>© {new Date().getFullYear()} {portfolio.name}</span><span>{portfolio.labels.footer}</span></footer>
+        <footer className="container site-footer">
+          <span>
+            © {new Date().getFullYear()} {portfolio.name}
+          </span>
+          <span>{portfolio.labels.footer}</span>
+        </footer>
       </body>
     </html>
   );
