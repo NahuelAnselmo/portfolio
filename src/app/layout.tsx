@@ -24,7 +24,15 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang={portfolio.locale}>
+    <html lang={portfolio.locale} suppressHydrationWarning>
+      <head>
+        {/* Se ejecuta antes del primer pintado para evitar un destello del tema incorrecto. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var p='system';try{var s=localStorage.getItem('portfolio-theme');if(s==='light'||s==='dark')p=s;}catch(e){}var r=document.documentElement;r.dataset.themePreference=p;r.dataset.theme=p==='system'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):p;})();`,
+          }}
+        />
+      </head>
       <body>
         <a className="skip-link" href="#contenido">
           {portfolio.labels.skip}

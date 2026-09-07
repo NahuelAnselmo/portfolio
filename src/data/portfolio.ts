@@ -27,6 +27,7 @@ type PortfolioContent = {
   description: string;
   navigation: readonly { href: string; label: string }[];
   labels: {
+    theme: { label: string; system: string; light: string; dark: string };
     skip: string;
     menu: string;
     closeMenu: string;
@@ -104,6 +105,12 @@ export const portfolio: PortfolioContent = {
     { href: "/#contacto", label: "Contacto" },
   ],
   labels: {
+    theme: {
+      label: "Tema de la página",
+      system: "Sistema",
+      light: "Claro",
+      dark: "Oscuro",
+    },
     skip: "Saltar al contenido",
     menu: "Abrir menú",
     closeMenu: "Cerrar menú",

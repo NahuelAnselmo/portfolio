@@ -1,17 +1,63 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-canvas: #f8f9f5;
-  --color-ink: #202b26;
-  --color-muted: #5c6861;
-  --color-accent: #286044;
-  --color-line: #dce2d9;
+  --color-canvas: var(--canvas);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
   --font-sans: Arial, Helvetica, sans-serif;
   --font-mono: "Courier New", monospace;
 }
 
 :root {
   color-scheme: light;
+  --canvas: #f7f8f4;
+  --ink: #202b26;
+  --muted: #58655d;
+  --accent: #286044;
+  --line: #d9e0d5;
+  --surface: #ffffff;
+  --tinted: #edf1e8;
+  --button-ink: #ffffff;
+  --accent-hover: #1b4731;
+  --shadow: 0 20px 60px #233f300b;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #101713;
+  --ink: #eef3e9;
+  --muted: #afbcaf;
+  --accent: #bade92;
+  --line: #344338;
+  --surface: #19231d;
+  --tinted: #151e18;
+  --button-ink: #172411;
+  --accent-hover: #d0edb2;
+  --shadow: 0 20px 60px #00000024;
+}
+.theme-control {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-inline: 0.7rem;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.theme-control select {
+  min-height: 44px;
+  max-width: 90px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.theme-control option {
+  background: var(--surface);
+  color: var(--ink);
 }
 html {
   scroll-behavior: smooth;
@@ -29,7 +75,7 @@ body {
   color: #183d2b;
 }
 :focus-visible {
-  outline: 3px solid #387a54;
+  outline: 3px solid var(--accent);
   outline-offset: 5px;
 }
 main:focus {
@@ -56,8 +102,8 @@ button {
   left: 1rem;
   z-index: 100;
   padding: 1rem;
-  background: var(--color-ink);
-  color: white;
+  background: var(--accent);
+  color: var(--button-ink);
   border-radius: 0.5rem;
 }
 .skip-link:focus {
@@ -68,7 +114,7 @@ button {
   top: 0;
   z-index: 30;
   border-bottom: 1px solid var(--color-line);
-  background: rgb(248 249 245 / 96%);
+  background: color-mix(in srgb, var(--canvas) 94%, transparent);
   backdrop-filter: blur(12px);
 }
 .wordmark {
@@ -180,17 +226,17 @@ button {
 }
 .button-primary {
   background: var(--color-accent);
-  color: white;
+  color: var(--button-ink);
 }
 .button-primary:hover {
-  background: #1b4731;
+  background: var(--accent-hover);
 }
 .button-secondary {
   border-color: var(--color-line);
   background: var(--color-canvas);
 }
 .button-secondary:hover {
-  background: #edf0e9;
+  background: var(--tinted);
 }
 .button-light {
   background: #e0efb6;
@@ -271,7 +317,7 @@ button {
   padding-top: 1.5rem;
 }
 .section-tinted {
-  background: #eef1e9;
+  background: var(--tinted);
   border-block: 1px solid var(--color-line);
 }
 .skill-card {
@@ -306,6 +352,7 @@ button {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  color: #202b26;
   background: #dce5d4;
   background-image: radial-gradient(#9bad964a 0.75px, transparent 0.75px);
   background-size: 14px 14px;
@@ -356,16 +403,16 @@ button {
 }
 .status-badge {
   padding: 0.3rem 0.55rem;
-  border: 1px solid #d0dac8;
+  border: 1px solid var(--line);
   border-radius: 4px;
-  color: #46643a;
+  color: var(--accent);
   font-size: 0.65rem;
 }
 .badge {
   padding: 0.35rem 0.6rem;
   border-radius: 4px;
-  background: #edf0e9;
-  color: #4c5c50;
+  background: var(--tinted);
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.65rem;
 }
