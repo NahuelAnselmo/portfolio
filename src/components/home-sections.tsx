@@ -7,33 +7,56 @@ export function Hero() {
   const { hero } = portfolio;
   return (
     <section className="hero container" aria-labelledby="hero-title">
-      <div className="hero-orbit" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <i />
-      </div>
-      <div className="relative z-10 max-w-4xl">
-        <p className="eyebrow">
-          <span className="status-dot" aria-hidden="true" />
-          {hero.eyebrow}
-        </p>
-        <h1 id="hero-title" className="hero-title">
-          {hero.title}
-          <br />
-          <span>{hero.accent}</span>
-        </h1>
-        <p className="hero-description">{hero.body}</p>
-        <div className="mt-9 flex flex-wrap gap-4">
-          <Link className="button button-primary" href="#proyectos">
-            {hero.primary}
-            <span aria-hidden="true">↗</span>
-          </Link>
-          <Link className="button button-secondary" href="#sobre-mi">
-            {hero.secondary}
-            <span aria-hidden="true">↓</span>
-          </Link>
+      <div className="hero-layout">
+        <div className="hero-copy">
+          <p className="eyebrow">{hero.eyebrow}</p>
+          <h1 id="hero-title" className="hero-title">
+            {hero.title}
+            <span>{hero.accent}</span>
+          </h1>
+          <p className="hero-description">{hero.body}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link className="button button-primary" href="#proyectos">
+              {hero.primary}
+              <span aria-hidden="true">↗</span>
+            </Link>
+            <Link className="button button-secondary" href="#contacto">
+              {hero.secondary}
+              <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <p className="availability">
+            <span className="status-dot" aria-hidden="true" />
+            {hero.availability}
+          </p>
         </div>
+        <aside className="profile-panel" aria-label={hero.panelTitle}>
+          <div className="panel-top">
+            <span className="panel-monogram" aria-hidden="true">
+              na.
+            </span>
+            <span className="eyebrow">{portfolio.role}</span>
+          </div>
+          <p className="panel-title">{hero.panelTitle}</p>
+          <p className="text-sm leading-relaxed text-muted">
+            {hero.panelDescription}
+          </p>
+          <ol className="capabilities">
+            {hero.capabilities.map((item, index) => (
+              <li key={item.title}>
+                <span className="capability-index" aria-hidden="true">
+                  0{index + 1}
+                </span>
+                <div>
+                  <p className="font-semibold">{item.title}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted">
+                    {item.detail}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </aside>
       </div>
       <div className="hero-bottom">
         <span>{portfolio.role}</span>
@@ -54,7 +77,7 @@ export function About() {
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
         <SectionHeading
           id="about-title"
-          number="01"
+          number="02"
           label={about.label}
           title={about.title}
         />
@@ -95,18 +118,18 @@ export function Skills() {
       <div className="container">
         <SectionHeading
           id="skills-title"
-          number="02"
+          number="03"
           label={skills.label}
           title={skills.title}
           intro={skills.intro}
         />
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="skills-grid mt-10">
           {skills.items.map((skill) => (
             <li key={skill.name} className="skill-card">
               <span className="skill-mark" aria-hidden="true">
                 {skill.mark}
               </span>
-              <p className="eyebrow mt-9 text-muted">{skill.category}</p>
+              <p className="eyebrow mt-5 text-muted">{skill.category}</p>
               <h3 className="mt-2 text-xl font-semibold">{skill.name}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">
                 {skill.description}
@@ -128,12 +151,12 @@ export function Projects() {
     >
       <SectionHeading
         id="projects-title"
-        number="03"
+        number="01"
         label={portfolio.projectsSection.label}
         title={portfolio.projectsSection.title}
         intro={portfolio.projectsSection.intro}
       />
-      <div className="mt-12 space-y-8">
+      <div className="project-list mt-12">
         {portfolio.projects.map((project, index) => (
           <ProjectCard key={project.slug} project={project} index={index} />
         ))}
@@ -211,6 +234,12 @@ export function Contact() {
         <p className="mt-6 max-w-xl leading-relaxed text-white/75">
           {contact.body}
         </p>
+        {contact.email && (
+          <a className="contact-email" href={`mailto:${contact.email}`}>
+            {contact.email}
+            <span aria-hidden="true">↗</span>
+          </a>
+        )}
         <div className="mt-9 flex flex-wrap gap-4">
           {contact.email && (
             <a className="button button-light" href={`mailto:${contact.email}`}>

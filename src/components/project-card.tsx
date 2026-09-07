@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { portfolio, type Project } from "@/data/portfolio";
+import { ProjectVisual } from "./project-visual";
 
 export function ProjectCard({
   project,
@@ -9,29 +10,40 @@ export function ProjectCard({
   index: number;
 }) {
   return (
-    <article className="project-card">
-      <div className="project-art" data-tone={project.tone} aria-hidden="true">
-        <div className="project-poster">
-          <span className="eyebrow">{project.category}</span>
-          <span className="poster-symbol">
-            {index === 0 ? "{ }" : index === 1 ? "&" : "↗"}
-          </span>
-          <strong>{project.title}</strong>
-          <span className="poster-caption">
-            {project.technologies.slice(0, 3).join(" / ")}
-          </span>
-        </div>
-        <span className="project-art-index">0{index + 1}</span>
+    <article
+      className="project-card"
+      aria-labelledby={`project-${project.slug}`}
+    >
+      <div className="project-card-visual">
+        <span className="project-index" aria-hidden="true">
+          0{index + 1} /
+        </span>
+        <ProjectVisual project={project} />
       </div>
-      <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-12">
+      <div className="project-card-content">
         <div className="flex flex-wrap items-center gap-3">
           <p className="eyebrow">{project.category}</p>
           <span className="status-badge">{project.status}</span>
         </div>
-        <h3 className="mt-5 text-3xl font-semibold tracking-tight">
+        <h3
+          id={`project-${project.slug}`}
+          className="mt-5 text-3xl font-semibold tracking-tight"
+        >
           {project.title}
         </h3>
         <p className="mt-4 leading-relaxed text-muted">{project.description}</p>
+        <p className="project-scope">{project.scope}</p>
+        <ul
+          className="project-highlights"
+          aria-label={portfolio.labels.highlights}
+        >
+          {project.highlights.map((highlight) => (
+            <li key={highlight}>
+              <span aria-hidden="true">↳</span>
+              {highlight}
+            </li>
+          ))}
+        </ul>
         <ul
           className="mt-6 flex flex-wrap gap-2"
           aria-label={portfolio.labels.stack}
@@ -43,7 +55,10 @@ export function ProjectCard({
           ))}
         </ul>
         <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-          <Link className="text-link" href={`/projects/${project.slug}`}>
+          <Link
+            className="button button-primary"
+            href={`/projects/${project.slug}`}
+          >
             {portfolio.labels.viewProject}
             <span aria-hidden="true">↗</span>
           </Link>

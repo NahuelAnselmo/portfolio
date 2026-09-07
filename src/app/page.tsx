@@ -31,9 +31,9 @@ export default function Home() {
         }}
       />
       <Hero />
+      <Projects />
       <About />
       <Skills />
-      <Projects />
       <Experience />
       <Contact />
     </main>

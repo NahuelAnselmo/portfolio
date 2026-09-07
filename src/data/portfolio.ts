@@ -4,6 +4,10 @@ export type Project = {
   category: string;
   status: string;
   description: string;
+  focus: string;
+  scope: string;
+  highlights: readonly string[];
+  flow: readonly { name: string; detail: string }[];
   technologies: readonly string[];
   repository: string;
   backendRepository?: string;
@@ -41,6 +45,13 @@ type PortfolioContent = {
     footer: string;
     backend: string;
     signature: string;
+    focus: string;
+    scope: string;
+    flow: string;
+    highlights: string;
+    caseIndex: string;
+    projectContact: string;
+    nextProject: string;
   };
   hero: {
     eyebrow: string;
@@ -49,6 +60,10 @@ type PortfolioContent = {
     body: string;
     primary: string;
     secondary: string;
+    availability: string;
+    panelTitle: string;
+    panelDescription: string;
+    capabilities: readonly { title: string; detail: string }[];
   };
   about: {
     label: string;
@@ -98,9 +113,9 @@ export const portfolio: PortfolioContent = {
   description:
     "Portfolio profesional de Nahuel Anselmo. Desarrollo web con Next.js, React, TypeScript y Tailwind CSS.",
   navigation: [
+    { href: "/#proyectos", label: "Proyectos" },
     { href: "/#sobre-mi", label: "Sobre mí" },
     { href: "/#tecnologias", label: "Tecnologías" },
-    { href: "/#proyectos", label: "Proyectos" },
     { href: "/#experiencia", label: "Experiencia" },
     { href: "/#contacto", label: "Contacto" },
   ],
@@ -123,15 +138,33 @@ export const portfolio: PortfolioContent = {
     stack: "Tecnologías del proyecto",
     footer: "Diseñado con intención. Construido para la web.",
     backend: "Código del backend",
-    signature: "DISEÑO CON INTENCIÓN / CÓDIGO CON CRITERIO",
+    signature: "REACT / NEXT.JS / NODE.JS / TYPESCRIPT",
+    focus: "Foco técnico",
+    scope: "Alcance",
+    flow: "Recorrido de la aplicación",
+    highlights: "Qué demuestra este proyecto",
+    caseIndex: "En este caso de estudio",
+    projectContact: "Hablemos de este proyecto",
+    nextProject: "Seguir explorando",
   },
   hero: {
-    eyebrow: "DESARROLLO WEB · PORTFOLIO PERSONAL",
-    title: "Ideas claras.",
-    accent: "Experiencias que funcionan.",
-    body: "Soy Nahuel Anselmo, Full Stack Web Developer. Desarrollo aplicaciones con React, Node.js y MongoDB, y sigo ampliando mi stack con Next.js y TypeScript.",
+    eyebrow: "FULL STACK WEB DEVELOPER",
+    title: "Nahuel Anselmo.",
+    accent: "De la idea a la web.",
+    body: "Desarrollo interfaces en React y APIs con Node.js. Conecto experiencia de usuario, lógica de negocio y datos para construir aplicaciones web completas.",
     primary: "Ver proyectos",
-    secondary: "Conocerme mejor",
+    secondary: "Hablemos",
+    availability: "Abierto a oportunidades laborales",
+    panelTitle: "Una mirada full stack.",
+    panelDescription: "Del primer clic a la persistencia de los datos.",
+    capabilities: [
+      { title: "Interfaces", detail: "React · Next.js · Tailwind CSS" },
+      {
+        title: "Lógica de aplicación",
+        detail: "Node.js · Express · APIs REST",
+      },
+      { title: "Datos", detail: "MongoDB · Mongoose" },
+    ],
   },
   about: {
     label: "Sobre mí",
@@ -214,13 +247,25 @@ export const portfolio: PortfolioContent = {
   },
   projectsSection: {
     label: "Proyectos",
-    title: "Del concepto\na la implementación.",
+    title: "Proyectos que hablan\npor mi código.",
     intro:
-      "Una mirada al código, al proceso y a las decisiones detrás de cada proyecto.",
+      "Aplicaciones propias y en equipo. Explorá qué resuelven, cómo están construidas y las decisiones que hay detrás.",
   },
   projects: [
     {
       slug: "gestor-de-tareas",
+      focus: "Autenticación y datos por usuario",
+      scope: "Aplicación full stack",
+      highlights: [
+        "Operaciones CRUD con persistencia en MongoDB",
+        "Rutas protegidas y validación de datos",
+        "Separación entre interfaz, API y modelos",
+      ],
+      flow: [
+        { name: "Interfaz", detail: "React · formularios y rutas" },
+        { name: "API", detail: "Express · autenticación y validación" },
+        { name: "Persistencia", detail: "MongoDB · tareas por usuario" },
+      ],
       title: "Gestor de tareas",
       category: "APLICACIÓN FULL STACK",
       status: "Código disponible",
@@ -255,6 +300,18 @@ export const portfolio: PortfolioContent = {
     },
     {
       slug: "la-cerveceria",
+      focus: "Catálogo, carrito y administración",
+      scope: "Proyecto colaborativo · equipo de 3",
+      highlights: [
+        "Catálogo con filtros y gestión de pedidos",
+        "Estado de sesión y carrito con Zustand",
+        "Colaboración con Mario Arroyo y Santiago Altamiranda",
+      ],
+      flow: [
+        { name: "Experiencia", detail: "React · catálogo y carrito" },
+        { name: "Operaciones", detail: "Express · productos y pedidos" },
+        { name: "Datos", detail: "MongoDB · usuarios y productos" },
+      ],
       title: "La Cervecería",
       category: "PROYECTO EN EQUIPO",
       status: "Código disponible",
@@ -289,6 +346,18 @@ export const portfolio: PortfolioContent = {
     },
     {
       slug: "portfolio-profesional",
+      focus: "Accesibilidad, rendimiento y presentación",
+      scope: "Portfolio personal",
+      highlights: [
+        "Contenido tipado y páginas prerenderizadas",
+        "Tema claro, oscuro y preferencia del sistema",
+        "Pruebas de navegador y controles de accesibilidad",
+      ],
+      flow: [
+        { name: "Contenido", detail: "TypeScript · datos y contratos" },
+        { name: "Renderizado", detail: "Next.js · Server Components" },
+        { name: "Interfaz", detail: "Tailwind CSS · diseño adaptable" },
+      ],
       title: "Portfolio profesional",
       category: "DESARROLLO WEB",
       status: "En desarrollo",
@@ -308,7 +377,7 @@ export const portfolio: PortfolioContent = {
         },
         {
           title: "Las decisiones",
-          body: "Las secciones se renderizan como Server Components. El menú móvil concentra la interacción del cliente. El contenido local versionado evita sumar infraestructura que esta primera versión no necesita.",
+          body: "Las secciones se renderizan como Server Components. El menú móvil y el selector de tema concentran la interacción del cliente. El contenido local versionado evita sumar infraestructura que esta primera versión no necesita.",
         },
         {
           title: "La experiencia",
