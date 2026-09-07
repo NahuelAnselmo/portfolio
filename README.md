@@ -81,9 +81,9 @@ GitHub Actions ejecuta formato, lint, tipos y las pruebas con build. La revisió
 
 Copiá `.env.example` a `.env.local` y configurá `SITE_URL` con el dominio público definitivo antes del build. No necesita el prefijo `NEXT_PUBLIC_` porque solo se usa en el servidor. No se incluyen credenciales ni claves de servicios.
 
-Con `SITE_URL` se habilitan indexación, URLs canónicas y sitemap. Sin ella, el sitio funciona en desarrollo, emite `noindex` y el sitemap queda vacío. El dominio debe configurarse también en el entorno de despliegue. Las previews que no deban indexarse deben dejar `SITE_URL` vacío.
+Con `SITE_URL` se habilitan indexación, URLs canónicas y sitemap. En producción de Vercel, si no se define esa variable, se utiliza automáticamente el dominio estable de `VERCEL_PROJECT_PRODUCTION_URL`. En local y en previews, sin `SITE_URL`, el sitio emite `noindex` y el sitemap queda vacío. Configurá cualquier dominio personalizado en Vercel o establecé `SITE_URL` únicamente en el entorno de producción.
 
-La aplicación incluye metadata por proyecto, imagen Open Graph generada localmente, icono SVG y datos estructurados `Person`. No se publicaron versiones remotas ni se configuró un dominio desde esta implementación.
+La aplicación incluye metadata por proyecto, imagen Open Graph generada localmente, icono SVG y datos estructurados `Person`. `vercel.json` fija Next.js y la instalación mediante `npm ci`, coherente con CI. `.vercel/` contiene la vinculación local con la cuenta y no se versiona. Para publicar desde una sesión autenticada de Vercel: `npx vercel --prod`.
 
 Para servir un build local:
 
