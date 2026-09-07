@@ -24,15 +24,15 @@ src/
 tests/e2e/      Recorridos de navegador y accesibilidad
 ```
 
-- Páginas y secciones son Server Components. Solo `mobile-menu.tsx` necesita estado de cliente.
+- Páginas y secciones son Server Components. `mobile-menu.tsx` y `theme-select.tsx` concentran la interactividad del cliente.
 - Home y proyectos se prerenderizan. Los slugs desconocidos devuelven 404.
 - `SectionHeading`, `ProjectCard` y `SiteHeader` concentran elementos compartidos. No hay un sistema de componentes genérico ni estado global.
 - Tailwind se integra con PostCSS. Los tokens y estilos visuales comunes viven en `src/app/globals.css`.
-- Las ilustraciones de proyectos son composiciones tipográficas decorativas, no capturas de las aplicaciones. Las fuentes son del sistema, sin descargas externas.
+- Los diagramas de proyectos representan el recorrido de cada aplicación a partir de su implementación; no se presentan como capturas de pantalla. Las fuentes son del sistema, sin descargas externas.
 
 ## Editar el contenido
 
-`src/data/portfolio.ts` contiene perfil, navegación, textos de interfaz, tecnologías, proyectos y experiencia. Para agregar un proyecto, incorporá un objeto en `projects` con un slug único, descripción, tecnologías y caso de estudio. Su tarjeta, página y entrada del sitemap se generan a partir de esos datos.
+`src/data/portfolio.ts` contiene perfil, navegación, textos de interfaz, tecnologías, proyectos y experiencia. Para agregar un proyecto, incorporá un objeto en `projects` con un slug único, descripción, tecnologías, foco técnico, alcance, capacidades demostradas, pasos del flujo y caso de estudio. Su tarjeta, página y entrada del sitemap se generan a partir de esos datos.
 
 `backendRepository` y `demo` son opcionales. Solo agregar demos verificadas. Para sumar una experiencia, indicá en `period` si se trata de formación, trabajo o práctica en proyectos y describí el alcance real.
 
@@ -50,7 +50,15 @@ Las aplicaciones externas no fueron ejecutadas ni auditadas. Los casos de estudi
 
 ### Incorporar inglés después
 
-Los textos traducibles están centralizados y la presentación consume el contrato `PortfolioContent`. Al incorporar inglés, extraer ese contrato a un módulo compartido, crear los contenidos `es` y `en` y resolverlos desde rutas localizadas. Pasar el contenido seleccionado a los componentes, actualizar `lang`, Open Graph y alternates `hreflang`. Por ahora no hay selector, rutas ni librería de traducción sin uso.
+Los textos traducibles están centralizados y la presentación consume el contrato `PortfolioContent`. Al incorporar inglés, extraer ese contrato a un módulo compartido, crear los contenidos `es` y `en` y resolverlos desde rutas localizadas. Pasar el contenido seleccionado a los componentes, actualizar `lang`, Open Graph y alternates `hreflang`. Por ahora no hay selector de idioma, rutas localizadas ni librería de traducción sin uso.
+
+## Diseño y temas
+
+La Home presenta primero el perfil y los proyectos, con acceso a casos de estudio, código y contacto. Cada caso tiene un índice de secciones, un resumen de alcance y navegación al siguiente proyecto. La experiencia de formación se distingue del trabajo profesional.
+
+El selector del encabezado ofrece **Sistema**, **Claro** y **Oscuro**. La primera visita respeta el sistema; la elección explícita se guarda en `localStorage`. Un script pequeño en el documento aplica la preferencia antes de pintar la página. El selector usa `useSyncExternalStore` para reflejar cambios del sistema y de otras pestañas sin diferencias de hidratación. Si el almacenamiento está bloqueado, la elección funciona durante la visita.
+
+Los colores semánticos están centralizados en variables CSS para ambas paletas. El cambio de tema no convierte las secciones ni los proyectos en Client Components y no agrega dependencias.
 
 ## Calidad
 
@@ -63,7 +71,7 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-`test:e2e` crea un build de producción y levanta su propio servidor en el puerto 3100. Ejecuta recorridos en Chromium de escritorio y móvil, navegación por teclado, menú, enlaces de proyectos/contacto, respuestas 404, metadata, imagen social y comprobaciones con axe. También comprueba desborde a 320, 768 y 1440 px y movimiento reducido.
+`test:e2e` crea un build de producción y levanta su propio servidor en el puerto 3100. Ejecuta recorridos en Chromium de escritorio y móvil, navegación por teclado, menú, enlaces de proyectos/contacto, respuestas 404, metadata, imagen social y comprobaciones con axe. También comprueba desborde a 320, 768 y 1440 px y movimiento reducido, persistencia del tema, cambios del sistema, almacenamiento bloqueado, navegación de casos y contraste en modo oscuro.
 
 En Linux, si faltan bibliotecas para Chromium: `npx playwright install --with-deps chromium`. Las capturas y trazas se guardan en `test-results/`; el informe HTML en `playwright-report/`. Estos archivos no se versionan.
 

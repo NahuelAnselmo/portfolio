@@ -112,6 +112,7 @@ test("no hay desborde horizontal y se respeta movimiento reducido", async ({
     path: test.info().outputPath("home-desktop.png"),
     fullPage: true,
   });
+  await page.screenshot({ path: test.info().outputPath("hero-light.png") });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({
     path: test.info().outputPath("home-mobile.png"),
