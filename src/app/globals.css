@@ -207,6 +207,8 @@ button {
   background: var(--color-canvas);
   border-bottom: 1px solid var(--color-line);
   box-shadow: 0 15px 20px #202b260a;
+  transform-origin: top;
+  animation: menu-enter 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .mobile-navigation a {
   display: block;
@@ -236,7 +238,6 @@ button {
 .hero {
   position: relative;
   isolation: isolate;
-  overflow: clip;
   padding-top: clamp(3rem, 7vw, 6rem);
 }
 .hero::before {
@@ -981,6 +982,16 @@ button {
     translate: 0 0;
   }
 }
+@keyframes menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.6rem) scaleY(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
 @keyframes reveal-rise {
   from {
     opacity: 0;
@@ -1103,8 +1114,8 @@ button {
 @media (max-width: 767px) {
   .hero-aura {
     top: 3rem;
-    right: -9rem;
-    width: 25rem;
+    right: -1rem;
+    width: min(25rem, calc(100% + 1rem));
     opacity: 0.42;
   }
   .hero-layout,
