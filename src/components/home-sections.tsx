@@ -7,6 +7,11 @@ export function Hero() {
   const { hero } = portfolio;
   return (
     <section className="hero container" aria-labelledby="hero-title">
+      <div className="hero-aura" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
       <div className="hero-layout">
         <div className="hero-copy">
           <p className="eyebrow">{hero.eyebrow}</p>
