@@ -46,9 +46,10 @@ La presentación es una redacción basada en información pública y datos propo
 - Formación RollingCode 2024–2025: información pública indexada de [LinkedIn](https://ar.linkedin.com/in/nahuelanselmo). El acceso directo está limitado; no se inventaron puestos ni fechas laborales.
 - Gestor de tareas: [cliente](https://github.com/NahuelAnselmo/client-tasks-crud) y [servidor](https://github.com/NahuelAnselmo/server-tasks-crud), revisando rutas, controladores y dependencias.
 - La Cervecería: [frontend](https://github.com/NahuelAnselmo/LaCerveceria-Front) y [backend](https://github.com/NahuelAnselmo/LaCerveceria-Back). Proyecto grupal con Mario Arroyo y Santiago Altamiranda; las funcionalidades se atribuyen al equipo.
+- Agenda Local: [frontend](https://github.com/NahuelAnselmo/agenda-local-frontend) y [backend](https://github.com/NahuelAnselmo/agenda-local-backend). Se revisaron los flujos, el modelo de datos, las migraciones, las pruebas y el historial de ambos repositorios para documentar el alcance actual sin presentar como terminadas las integraciones pendientes.
 - DevFlow no se presenta como aplicación terminada: al revisar el frontend público, `App.tsx` conservaba la pantalla de ejemplo de Vite.
 
-Las aplicaciones externas no fueron ejecutadas ni auditadas. Los casos de estudio describen el código consultado, sin afirmar resultados comerciales o métricas de producción. Antes de publicar, revisar la voz de la presentación y precisar las contribuciones personales en el trabajo grupal.
+El gestor de tareas y La Cervecería no fueron ejecutados ni auditados. Agenda Local sí fue desarrollado y verificado localmente durante su implementación. Los casos de estudio describen el código consultado, sin afirmar resultados comerciales o métricas de producción. Antes de publicar, revisar la voz de la presentación y precisar las contribuciones personales en el trabajo grupal.
 
 ### Incorporar inglés después
 

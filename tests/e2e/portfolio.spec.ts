@@ -12,8 +12,8 @@ test("el recorrido de proyectos funciona y conserva un contacto directo", async 
     .click();
   await expect(page).toHaveURL(/#proyectos$/);
   const projects = page.locator("#proyectos article");
-  await expect(projects).toHaveCount(3);
-  for (let index = 0; index < 3; index++) {
+  await expect(projects).toHaveCount(4);
+  for (let index = 0; index < 4; index++) {
     const title = await projects.nth(index).getByRole("heading").innerText();
     await projects
       .nth(index)
@@ -78,7 +78,7 @@ test("home y caso de estudio pasan los controles automáticos de accesibilidad",
   page,
   isMobile,
 }) => {
-  for (const path of ["/", "/projects/gestor-de-tareas"]) {
+  for (const path of ["/", "/projects/agenda-local"]) {
     await page.goto(path);
     const result = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
@@ -124,15 +124,15 @@ test("metadata, recursos sociales, sitemap y rutas inexistentes responden correc
   page,
   request,
 }) => {
-  await page.goto("/projects/gestor-de-tareas");
-  await expect(page).toHaveTitle("Gestor de tareas | Nahuel Anselmo");
+  await page.goto("/projects/agenda-local");
+  await expect(page).toHaveTitle("Agenda Local | Nahuel Anselmo");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
-    "http://127.0.0.1:3100/projects/gestor-de-tareas",
+    "http://127.0.0.1:3100/projects/agenda-local",
   );
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
     "content",
-    "Gestor de tareas",
+    "Agenda Local",
   );
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
   const og = await request.get("/opengraph-image");
@@ -140,7 +140,7 @@ test("metadata, recursos sociales, sitemap y rutas inexistentes responden correc
   expect(og.headers()["content-type"]).toContain("image/png");
   const sitemap = await request.get("/sitemap.xml");
   expect(await sitemap.text()).toContain(
-    "http://127.0.0.1:3100/projects/la-cerveceria",
+    "http://127.0.0.1:3100/projects/agenda-local",
   );
   const robots = await request.get("/robots.txt");
   expect(await robots.text()).toContain("Allow: /");

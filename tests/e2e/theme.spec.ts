@@ -63,6 +63,7 @@ test("las páginas mantienen contraste y distribución en modo oscuro", async ({
   await page.emulateMedia({ colorScheme: "dark", reducedMotion: "reduce" });
   for (const path of [
     "/",
+    "/projects/agenda-local",
     "/projects/gestor-de-tareas",
     "/projects/la-cerveceria",
     "/projects/portfolio-profesional",
@@ -101,22 +102,22 @@ test("las páginas mantienen contraste y distribución en modo oscuro", async ({
 test("los casos permiten navegar el índice, contactar y seguir a otro proyecto", async ({
   page,
 }) => {
-  await page.goto("/projects/gestor-de-tareas");
+  await page.goto("/projects/agenda-local");
   const index = page.getByRole("navigation", {
     name: "En este caso de estudio",
   });
-  await index.getByRole("link", { name: "Los datos y el acceso" }).click();
+  await index.getByRole("link", { name: "Consistencia de la agenda" }).click();
   await expect(page).toHaveURL(/#seccion-3$/);
   await expect(
     page.getByRole("link", { name: "Hablemos de este proyecto" }),
   ).toHaveAttribute(
     "href",
-    "mailto:nahuelanselmo63t@gmail.com?subject=Gestor%20de%20tareas",
+    "mailto:nahuelanselmo63t@gmail.com?subject=Agenda%20Local",
   );
   await page
-    .getByRole("link", { name: "Seguir explorando: La Cervecería" })
+    .getByRole("link", { name: "Seguir explorando: Gestor de tareas" })
     .click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "La Cervecería",
+    "Gestor de tareas",
   );
 });

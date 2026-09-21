@@ -111,7 +111,7 @@ export const portfolio: PortfolioContent = {
   name: "Nahuel Anselmo",
   role: "Full Stack Web Developer",
   description:
-    "Portfolio profesional de Nahuel Anselmo. Desarrollo web con Next.js, React, TypeScript y Tailwind CSS.",
+    "Portfolio profesional de Nahuel Anselmo. Aplicaciones full stack con Next.js, React, TypeScript, Node.js y PostgreSQL.",
   navigation: [
     { href: "/#proyectos", label: "Proyectos" },
     { href: "/#sobre-mi", label: "Sobre mí" },
@@ -163,7 +163,7 @@ export const portfolio: PortfolioContent = {
         title: "Lógica de aplicación",
         detail: "Node.js · Express · APIs REST",
       },
-      { title: "Datos", detail: "MongoDB · Mongoose" },
+      { title: "Datos", detail: "PostgreSQL · Prisma · MongoDB" },
     ],
   },
   about: {
@@ -173,7 +173,7 @@ export const portfolio: PortfolioContent = {
       "Me interesa tanto cómo funciona una aplicación como la experiencia de quien la usa.",
     paragraphs: [
       "Me formé en Desarrollo Web Full Stack en RollingCode School. A través de proyectos individuales y en equipo trabajé con interfaces en React, APIs en Node.js y Express, autenticación y persistencia en MongoDB.",
-      "Mis proyectos incluyen un gestor de tareas y una aplicación de pedidos para gastronomía. Hoy sigo profundizando en Next.js, TypeScript y Tailwind CSS, con foco en escribir código mantenible y construir experiencias claras para quienes las usan.",
+      "Mi proyecto más reciente es Agenda Local, una plataforma de reservas para comercios de servicios con agenda pública, panel por roles y una API preparada para múltiples negocios. También desarrollé un gestor de tareas y participé en una aplicación de pedidos para gastronomía.",
     ],
     principles: [
       {
@@ -232,10 +232,11 @@ export const portfolio: PortfolioContent = {
         mark: "Ex",
       },
       {
-        name: "MongoDB",
-        category: "BASE DE DATOS",
-        description: "Persistencia de usuarios, tareas y productos.",
-        mark: "Mo",
+        name: "PostgreSQL y MongoDB",
+        category: "BASES DE DATOS",
+        description:
+          "Modelado relacional con Prisma y persistencia documental.",
+        mark: "DB",
       },
       {
         name: "Git y GitHub",
@@ -252,6 +253,65 @@ export const portfolio: PortfolioContent = {
       "Aplicaciones propias y en equipo. Explorá qué resuelven, cómo están construidas y las decisiones que hay detrás.",
   },
   projects: [
+    {
+      slug: "agenda-local",
+      focus: "Reservas confiables y gestión por roles",
+      scope: "Producto full stack · frontend y API separados",
+      highlights: [
+        "Agenda pública y panel operativo para propietarios y profesionales",
+        "Protección ante turnos superpuestos y reintentos duplicados",
+        "Gestión de equipo, servicios, horarios, ausencias y accesos",
+      ],
+      flow: [
+        { name: "Reserva", detail: "Next.js · disponibilidad y confirmación" },
+        { name: "Negocio", detail: "Express · reglas y acceso por roles" },
+        { name: "Agenda", detail: "PostgreSQL · turnos consistentes" },
+      ],
+      title: "Agenda Local",
+      category: "PRODUCTO FULL STACK",
+      status: "En desarrollo",
+      tone: "sage",
+      description:
+        "Plataforma de turnos para comercios de servicios que une una reserva pública clara con la gestión diaria del propietario y de cada profesional.",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Express",
+        "Prisma",
+        "PostgreSQL",
+        "Resend",
+      ],
+      repository: "https://github.com/NahuelAnselmo/agenda-local-frontend",
+      backendRepository:
+        "https://github.com/NahuelAnselmo/agenda-local-backend",
+      caseStudy: [
+        {
+          title: "El problema",
+          body: "Muchos comercios coordinan turnos por WhatsApp y los registran a mano. Agenda Local organiza ese trabajo sin perder el canal habitual: el cliente reserva desde una experiencia pública y el negocio también puede cargar turnos recibidos por WhatsApp, teléfono o en persona.",
+        },
+        {
+          title: "Dos experiencias conectadas",
+          body: "El sitio público permite elegir servicio, profesional, fecha y horario. En el panel, el propietario consulta métricas y administra toda la operación; cada profesional entra con su propia cuenta y ve únicamente su agenda. Ambos trabajan sobre los mismos datos actualizados.",
+        },
+        {
+          title: "Consistencia de la agenda",
+          body: "La API valida disponibilidad, duración, horarios y ausencias antes de confirmar. PostgreSQL impide superposiciones por profesional y las reservas públicas usan claves de idempotencia para que un reintento de red no cree turnos duplicados.",
+        },
+        {
+          title: "Operación del negocio",
+          body: "El panel permite buscar, filtrar, confirmar, finalizar, cancelar y reprogramar turnos. También centraliza servicios, profesionales, asignaciones, horarios, bloqueos de agenda y datos públicos del comercio, conservando el historial cuando una persona deja el equipo.",
+        },
+        {
+          title: "Acceso y comunicación",
+          body: "Las sesiones usan cookies HTTP-only y los permisos se aplican en la API según organización y rol. El propietario puede crear accesos individuales y, cuando Resend está configurado, enviar por email el enlace de ingreso y las credenciales temporales del profesional.",
+        },
+        {
+          title: "Estado actual",
+          body: "El frontend y la API están disponibles en repositorios separados y continúan en desarrollo. La siguiente etapa contempla invitaciones de acceso más seguras, notificaciones automáticas para clientes, despliegue público y pruebas de carga en un entorno similar a producción.",
+        },
+      ],
+    },
     {
       slug: "gestor-de-tareas",
       focus: "Autenticación y datos por usuario",
@@ -412,7 +472,7 @@ export const portfolio: PortfolioContent = {
         organization: "Proyectos propios y colaborativos",
         period: "EXPERIENCIA EN PROYECTOS",
         description:
-          "Implementación de un gestor de tareas MERN y participación en La Cervecería. Una base práctica para seguir profundizando en frontend, backend e integración de aplicaciones.",
+          "Diseño y desarrollo de Agenda Local, una plataforma de turnos con Next.js, Express y PostgreSQL. Implementación de un gestor de tareas MERN y participación en La Cervecería.",
       },
     ],
   },
