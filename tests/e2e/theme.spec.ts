@@ -12,12 +12,15 @@ test("el tema sigue al sistema y conserva una elección explícita entre página
   await page.emulateMedia({ colorScheme: "dark" });
   await page.goto("/");
   const root = page.locator("html");
-  const selector = page.getByRole("combobox", { name: "Tema de la página" });
+  const selector = page.getByRole("button", {
+    name: "Tema de la página: Sistema",
+  });
   await expect(root).toHaveAttribute("data-theme", "dark");
-  await expect(selector).toHaveValue("system");
+  await expect(selector).toHaveText(/Sistema/);
   await page.emulateMedia({ colorScheme: "light" });
   await expect(root).toHaveAttribute("data-theme", "light");
-  await selector.selectOption("dark");
+  await selector.click();
+  await page.getByRole("menuitemradio", { name: "Oscuro" }).click();
   await expect(root).toHaveAttribute("data-theme", "dark");
   await page
     .locator("#proyectos article")
@@ -25,15 +28,39 @@ test("el tema sigue al sistema y conserva una elección explícita entre página
     .getByRole("link", { name: "Explorar proyecto" })
     .click();
   await expect(root).toHaveAttribute("data-theme", "dark");
-  await expect(selector).toHaveValue("dark");
+  await expect(
+    page.getByRole("button", { name: "Tema de la página: Oscuro" }),
+  ).toBeVisible();
   await page.reload();
   await expect(root).toHaveAttribute("data-theme", "dark");
-  await expect(selector).toHaveValue("dark");
-  await selector.selectOption("light");
+  const darkSelector = page.getByRole("button", {
+    name: "Tema de la página: Oscuro",
+  });
+  await expect(darkSelector).toHaveText(/Oscuro/);
+  await darkSelector.click();
+  await page.getByRole("menuitemradio", { name: "Claro" }).click();
   await page.emulateMedia({ colorScheme: "dark" });
   await expect(root).toHaveAttribute("data-theme", "light");
-  await selector.selectOption("system");
+  const lightSelector = page.getByRole("button", {
+    name: "Tema de la página: Claro",
+  });
+  await lightSelector.click();
+  await page.getByRole("menuitemradio", { name: "Sistema" }).click();
   await expect(root).toHaveAttribute("data-theme", "dark");
+  const systemSelector = page.getByRole("button", {
+    name: "Tema de la página: Sistema",
+  });
+  await systemSelector.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(
+    page.getByRole("menuitemradio", { name: "Sistema" }),
+  ).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(
+    page.getByRole("menuitemradio", { name: "Claro" }),
+  ).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(systemSelector).toBeFocused();
   expect(errors).toEqual([]);
 });
 
@@ -51,8 +78,9 @@ test("el tema funciona cuando localStorage está bloqueado", async ({
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await page
-    .getByRole("combobox", { name: "Tema de la página" })
-    .selectOption("light");
+    .getByRole("button", { name: "Tema de la página: Sistema" })
+    .click();
+  await page.getByRole("menuitemradio", { name: "Claro" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 });
 

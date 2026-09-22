@@ -1,10 +1,11 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 type Theme = "system" | "light" | "dark";
 const key = "portfolio-theme";
 const eventName = "portfolio-theme-change";
+const themes: readonly Theme[] = ["system", "light", "dark"];
 
 function normalize(value: string | null | undefined): Theme {
   return value === "light" || value === "dark" ? value : "system";
@@ -52,43 +53,155 @@ export function ThemeSelect({
 }: {
   labels: Record<Theme | "label", string>;
 }) {
+  const [open, setOpen] = useState(false);
+  const control = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const options = useRef<Record<Theme, HTMLButtonElement | null>>({
+    system: null,
+    light: null,
+    dark: null,
+  });
   const preference = useSyncExternalStore(
     subscribe,
     snapshot,
     () => "system" as const,
   );
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOutside = (event: PointerEvent) => {
+      if (!control.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    return () => document.removeEventListener("pointerdown", closeOutside);
+  }, [open]);
+
+  function choose(next: Theme) {
+    apply(next);
+    try {
+      localStorage.setItem(key, next);
+    } catch {
+      /* La preferencia sigue funcionando durante esta visita. */
+    }
+    window.dispatchEvent(new Event(eventName));
+    setOpen(false);
+    trigger.current?.focus();
+  }
+
+  function focusOption(theme: Theme) {
+    requestAnimationFrame(() => options.current[theme]?.focus());
+  }
+
+  function moveFocus(current: Theme, direction: 1 | -1) {
+    const index = themes.indexOf(current);
+    const next = themes[(index + direction + themes.length) % themes.length];
+    options.current[next]?.focus();
+  }
+
   return (
-    <label className="theme-control">
-      <span className="sr-only">{labels.label}</span>
-      <svg
-        aria-hidden="true"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      >
-        <circle cx="12" cy="12" r="8" />
-        <path d="M12 4v16a8 8 0 0 0 0-16Z" fill="currentColor" />
-      </svg>
-      <select
-        value={preference}
-        onChange={(event) => {
-          const next = normalize(event.target.value);
-          apply(next);
-          try {
-            localStorage.setItem(key, next);
-          } catch {
-            /* La preferencia sigue funcionando durante esta visita. */
+    <div
+      ref={control}
+      className="theme-control"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && open) {
+          event.preventDefault();
+          setOpen(false);
+          trigger.current?.focus();
+        }
+      }}
+    >
+      <button
+        ref={trigger}
+        type="button"
+        className="theme-trigger"
+        aria-label={`${labels.label}: ${labels[preference]}`}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls="theme-options"
+        onClick={() => setOpen((current) => !current)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+            event.preventDefault();
+            setOpen(true);
+            focusOption(preference);
           }
-          window.dispatchEvent(new Event(eventName));
         }}
       >
-        <option value="system">{labels.system}</option>
-        <option value="light">{labels.light}</option>
-        <option value="dark">{labels.dark}</option>
-      </select>
-    </label>
+        <svg
+          aria-hidden="true"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
+          <circle cx="12" cy="12" r="8" />
+          <path d="M12 4v16a8 8 0 0 0 0-16Z" fill="currentColor" />
+        </svg>
+        <span>{labels[preference]}</span>
+        <svg
+          className="theme-chevron"
+          aria-hidden="true"
+          width="14"
+          height="14"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+        >
+          <path d="m4 6 4 4 4-4" />
+        </svg>
+      </button>
+      {open && (
+        <div className="theme-menu">
+          <p id="theme-options-label" className="theme-menu-label">
+            {labels.label}
+          </p>
+          <div
+            id="theme-options"
+            role="menu"
+            aria-labelledby="theme-options-label"
+          >
+            {themes.map((theme) => (
+              <button
+                key={theme}
+                ref={(element) => {
+                  options.current[theme] = element;
+                }}
+                type="button"
+                role="menuitemradio"
+                aria-checked={preference === theme}
+                className="theme-option"
+                onClick={() => choose(theme)}
+                onKeyDown={(event) => {
+                  if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                    event.preventDefault();
+                    moveFocus(theme, event.key === "ArrowDown" ? 1 : -1);
+                  }
+                  if (event.key === "Home" || event.key === "End") {
+                    event.preventDefault();
+                    options.current[
+                      event.key === "Home" ? "system" : "dark"
+                    ]?.focus();
+                  }
+                }}
+              >
+                <span className="theme-option-mark" aria-hidden="true" />
+                {labels[theme]}
+                {preference === theme && (
+                  <span className="theme-option-check" aria-hidden="true">
+                    ✓
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
