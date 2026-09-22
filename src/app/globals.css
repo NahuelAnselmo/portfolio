@@ -245,7 +245,7 @@ button {
   position: absolute;
   z-index: -2;
   top: 1rem;
-  right: -10vw;
+  right: 0;
   width: min(54vw, 700px);
   aspect-ratio: 1;
   border-radius: 50%;
