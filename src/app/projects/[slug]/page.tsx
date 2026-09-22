@@ -27,6 +27,12 @@ export async function generateMetadata({
       type: "article",
       locale: "es_AR",
       siteName: portfolio.name,
+      url: `/projects/${project.slug}`,
+      title: project.title,
+      description: project.description,
+    },
+    twitter: {
+      card: "summary_large_image",
       title: project.title,
       description: project.description,
     },

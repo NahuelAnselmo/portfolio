@@ -134,10 +134,17 @@ test("metadata, recursos sociales, sitemap y rutas inexistentes responden correc
     "content",
     "Agenda Local",
   );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    /\/projects\/agenda-local\/opengraph-image/,
+  );
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
   const og = await request.get("/opengraph-image");
   expect(og.ok()).toBe(true);
   expect(og.headers()["content-type"]).toContain("image/png");
+  const projectOg = await request.get("/projects/agenda-local/opengraph-image");
+  expect(projectOg.ok()).toBe(true);
+  expect(projectOg.headers()["content-type"]).toContain("image/png");
   const sitemap = await request.get("/sitemap.xml");
   expect(await sitemap.text()).toContain(
     "http://127.0.0.1:3100/projects/agenda-local",
