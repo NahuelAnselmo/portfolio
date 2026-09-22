@@ -62,7 +62,12 @@ export function ProjectCard({
             {portfolio.labels.viewProject}
             <span aria-hidden="true">↗</span>
           </Link>
-          <a className="text-link text-muted" href={project.repository}>
+          <a
+            className="text-link text-muted"
+            href={project.repository}
+            target="_blank"
+            rel="noreferrer"
+          >
             {portfolio.labels.repository}
             <span aria-hidden="true">↗</span>
           </a>

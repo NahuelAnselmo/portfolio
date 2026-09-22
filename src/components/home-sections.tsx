@@ -253,7 +253,13 @@ export function Contact() {
             </a>
           )}
           {contact.links.map((link) => (
-            <a className="button button-light" href={link.href} key={link.href}>
+            <a
+              className="button button-light"
+              href={link.href}
+              key={link.href}
+              target="_blank"
+              rel="me noreferrer"
+            >
               {link.label}
               <span aria-hidden="true">↗</span>
             </a>

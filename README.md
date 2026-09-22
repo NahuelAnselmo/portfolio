@@ -86,7 +86,7 @@ Copiá `.env.example` a `.env.local` y configurá `SITE_URL` con el dominio púb
 
 Con `SITE_URL` se habilitan indexación, URLs canónicas y sitemap. En producción de Vercel, si no se define esa variable, se utiliza automáticamente el dominio estable de `VERCEL_PROJECT_PRODUCTION_URL`. En local y en previews, sin `SITE_URL`, el sitio emite `noindex` y el sitemap queda vacío. Configurá cualquier dominio personalizado en Vercel o establecé `SITE_URL` únicamente en el entorno de producción.
 
-La aplicación incluye metadata por proyecto, imagen Open Graph generada localmente, icono SVG y datos estructurados `Person`. `vercel.json` fija Next.js y la instalación mediante `npm ci`, coherente con CI. `.vercel/` contiene la vinculación local con la cuenta y no se versiona. Para publicar desde una sesión autenticada de Vercel: `npx vercel --prod`.
+La aplicación incluye metadata e imagen Open Graph específica por proyecto, icono SVG y datos estructurados `Person` y `SoftwareSourceCode`. De esta forma, cada caso de estudio genera una vista previa propia al compartirse en LinkedIn o mensajería. `vercel.json` fija Next.js y la instalación mediante `npm ci`, coherente con CI. `.vercel/` contiene la vinculación local con la cuenta y no se versiona. Para publicar desde una sesión autenticada de Vercel: `npx vercel --prod`.
 
 Para servir un build local:
 

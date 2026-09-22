@@ -48,8 +48,32 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     portfolio.projects[
       (portfolio.projects.indexOf(project) + 1) % portfolio.projects.length
     ];
+  const projectJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: project.title,
+    description: project.description,
+    url: siteUrl
+      ? new URL(`/projects/${project.slug}`, siteUrl).href
+      : undefined,
+    codeRepository: [project.repository, project.backendRepository].filter(
+      Boolean,
+    ),
+    programmingLanguage: project.technologies,
+    author: {
+      "@type": "Person",
+      name: portfolio.name,
+      url: siteUrl?.href,
+    },
+  };
   return (
     <main id="contenido" tabIndex={-1} className="container section">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(projectJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <Link className="text-link" href="/#proyectos">
         <span aria-hidden="true">←</span>
         {portfolio.labels.back}
@@ -76,7 +100,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               ))}
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="button button-primary" href={project.repository}>
+              <a
+                className="button button-primary"
+                href={project.repository}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {portfolio.labels.repository}
                 <span aria-hidden="true">↗</span>
               </a>
@@ -84,13 +113,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <a
                   className="button button-secondary"
                   href={project.backendRepository}
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   {portfolio.labels.backend}
                   <span aria-hidden="true">↗</span>
                 </a>
               )}
               {project.demo && (
-                <a className="button button-secondary" href={project.demo}>
+                <a
+                  className="button button-secondary"
+                  href={project.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {portfolio.labels.demo}
                   <span aria-hidden="true">↗</span>
                 </a>

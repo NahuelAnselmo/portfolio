@@ -8,16 +8,24 @@ export const metadata: Metadata = {
   title: `${portfolio.name} | ${portfolio.role}`,
   description: portfolio.description,
   metadataBase: siteUrl,
+  applicationName: `${portfolio.name} — Portfolio`,
   authors: [{ name: portfolio.name }],
+  creator: portfolio.name,
+  publisher: portfolio.name,
   robots: { index: Boolean(siteUrl), follow: Boolean(siteUrl) },
   openGraph: {
     type: "website",
     locale: "es_AR",
     siteName: portfolio.name,
+    url: siteUrl,
     title: `${portfolio.name} | ${portfolio.role}`,
     description: portfolio.description,
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: `${portfolio.name} | ${portfolio.role}`,
+    description: portfolio.description,
+  },
 };
 
 export default function RootLayout({

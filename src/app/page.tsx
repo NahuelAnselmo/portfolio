@@ -26,6 +26,10 @@ export default function Home() {
             name: portfolio.name,
             jobTitle: portfolio.role,
             url: siteUrl?.href,
+            email: portfolio.contact.email
+              ? `mailto:${portfolio.contact.email}`
+              : undefined,
+            knowsAbout: portfolio.skills.items.map(({ name }) => name),
             sameAs: portfolio.contact.links.map(({ href }) => href),
           }).replace(/</g, "\\u003c"),
         }}
