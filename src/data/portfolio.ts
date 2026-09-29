@@ -269,7 +269,7 @@ export const portfolio: PortfolioContent = {
       ],
       title: "Agenda Local",
       category: "PRODUCTO FULL STACK",
-      status: "En desarrollo",
+      status: "Demo pública",
       tone: "sage",
       description:
         "Plataforma de turnos para comercios de servicios que une una reserva pública clara con la gestión diaria del propietario y de cada profesional.",
@@ -285,6 +285,7 @@ export const portfolio: PortfolioContent = {
       repository: "https://github.com/NahuelAnselmo/agenda-local-frontend",
       backendRepository:
         "https://github.com/NahuelAnselmo/agenda-local-backend",
+      demo: "https://agenda-local-web.vercel.app",
       caseStudy: [
         {
           title: "El problema",
@@ -308,7 +309,7 @@ export const portfolio: PortfolioContent = {
         },
         {
           title: "Estado actual",
-          body: "El frontend y la API están disponibles en repositorios separados y continúan en desarrollo. La siguiente etapa contempla invitaciones de acceso más seguras, notificaciones automáticas para clientes, despliegue público y pruebas de carga en un entorno similar a producción.",
+          body: "El frontend y la API están desplegados por separado en Vercel, con PostgreSQL administrado en Neon y una demo pública que restaura sus datos cada día. La siguiente etapa contempla invitaciones de acceso con activación de contraseña, notificaciones para clientes y pruebas de carga sobre escenarios de uso reales.",
         },
       ],
     },

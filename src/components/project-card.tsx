@@ -62,6 +62,17 @@ export function ProjectCard({
             {portfolio.labels.viewProject}
             <span aria-hidden="true">↗</span>
           </Link>
+          {project.demo && (
+            <a
+              className="text-link text-muted"
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {portfolio.labels.demo}
+              <span aria-hidden="true">↗</span>
+            </a>
+          )}
           <a
             className="text-link text-muted"
             href={project.repository}
