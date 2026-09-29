@@ -62,6 +62,8 @@ type PortfolioContent = {
     caseIndex: string;
     projectContact: string;
     nextProject: string;
+    cv: string;
+    downloadCv: string;
   };
   hero: {
     eyebrow: string;
@@ -160,6 +162,8 @@ export const portfolio: PortfolioContent = {
     caseIndex: "En este caso de estudio",
     projectContact: "Hablemos de este proyecto",
     nextProject: "Seguir explorando",
+    cv: "Ver CV",
+    downloadCv: "Descargar PDF",
   },
   hero: {
     eyebrow: "FULL STACK WEB DEVELOPER",

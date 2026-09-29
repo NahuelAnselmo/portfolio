@@ -2,7 +2,7 @@
 
 **Sitio público:** [nahuel-anselmo-portfolio.vercel.app](https://nahuel-anselmo-portfolio.vercel.app)
 
-Portfolio profesional en español con Next.js App Router, React, TypeScript estricto y Tailwind CSS. Incluye presentación, tecnologías, proyectos con casos de estudio, formación/experiencia práctica y contacto.
+Portfolio profesional en español con Next.js App Router, React, TypeScript estricto y Tailwind CSS. Incluye presentación, tecnologías, proyectos con casos de estudio y capturas reales, formación/experiencia práctica, CV descargable y contacto.
 
 ## Desarrollo local
 
@@ -22,6 +22,7 @@ src/
   app/          Rutas, layout, estilos globales y metadata
   components/   Secciones, navegación y componentes compartidos
   data/         Contenido y contratos TypeScript
+  app/cv/       Versión web imprimible del currículum
   lib/          Configuración del dominio, usada por SEO
 tests/e2e/      Recorridos de navegador y accesibilidad
 ```
@@ -30,13 +31,13 @@ tests/e2e/      Recorridos de navegador y accesibilidad
 - Home y proyectos se prerenderizan. Los slugs desconocidos devuelven 404.
 - `SectionHeading`, `ProjectCard` y `SiteHeader` concentran elementos compartidos. No hay un sistema de componentes genérico ni estado global.
 - Tailwind se integra con PostCSS. Los tokens y estilos visuales comunes viven en `src/app/globals.css`.
-- Los diagramas de proyectos representan el recorrido de cada aplicación a partir de su implementación; no se presentan como capturas de pantalla. Las fuentes son del sistema, sin descargas externas.
+- Los proyectos pueden combinar diagramas del recorrido con capturas verificadas de sus demos. Agenda Local incluye imágenes reales de su despliegue público. Las fuentes son del sistema, sin descargas externas.
 
 ## Editar el contenido
 
 `src/data/portfolio.ts` contiene perfil, navegación, textos de interfaz, tecnologías, proyectos y experiencia. Para agregar un proyecto, incorporá un objeto en `projects` con un slug único, descripción, tecnologías, foco técnico, alcance, capacidades demostradas, pasos del flujo y caso de estudio. Su tarjeta, página y entrada del sitemap se generan a partir de esos datos.
 
-`backendRepository` y `demo` son opcionales. Solo agregar demos verificadas. Para sumar una experiencia, indicá en `period` si se trata de formación, trabajo o práctica en proyectos y describí el alcance real.
+`backendRepository`, `demo` y `screenshots` son opcionales. Solo agregar demos verificadas y capturas propias con texto alternativo. Para sumar una experiencia, indicá en `period` si se trata de formación, trabajo o práctica en proyectos y describí el alcance real.
 
 ### Fuentes del perfil
 
@@ -95,4 +96,6 @@ npm run build
 npm run start
 ```
 
-Pendientes editoriales opcionales: CV, capturas reales de proyectos, demos verificadas y mayor detalle de las contribuciones individuales. La versión en inglés queda para una etapa posterior.
+Pendientes editoriales opcionales: sumar capturas o demos verificadas de los proyectos anteriores y precisar aún más las contribuciones individuales. La versión en inglés queda para una etapa posterior.
+
+El CV cuenta con una ruta web accesible en `/cv` y una versión A4 de una página en `public/nahuel-anselmo-cv.pdf` para adjuntar en postulaciones.

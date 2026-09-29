@@ -161,3 +161,25 @@ test("metadata, recursos sociales, sitemap y rutas inexistentes responden correc
     await expect(page).toHaveURL("/");
   }
 });
+
+test("el CV es accesible y ofrece un PDF descargable", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/cv");
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Nahuel Anselmo" }),
+  ).toBeVisible();
+  const download = page.getByRole("link", { name: "Descargar PDF" });
+  await expect(download).toHaveAttribute("href", "/nahuel-anselmo-cv.pdf");
+  await expect(download).toHaveAttribute("download", "");
+
+  const accessibility = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(accessibility.violations).toEqual([]);
+
+  const pdf = await request.get("/nahuel-anselmo-cv.pdf");
+  expect(pdf.ok()).toBe(true);
+  expect(pdf.headers()["content-type"]).toContain("application/pdf");
+});

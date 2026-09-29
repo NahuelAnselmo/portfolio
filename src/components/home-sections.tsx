@@ -29,6 +29,10 @@ export function Hero() {
               {hero.secondary}
               <span aria-hidden="true">↗</span>
             </Link>
+            <Link className="button button-secondary" href="/cv">
+              {portfolio.labels.cv}
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
           <p className="availability">
             <span className="status-dot" aria-hidden="true" />
