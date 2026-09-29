@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { portfolio, type Project } from "@/data/portfolio";
 import { ProjectVisual } from "./project-visual";
@@ -18,7 +19,23 @@ export function ProjectCard({
         <span className="project-index" aria-hidden="true">
           0{index + 1} /
         </span>
-        <ProjectVisual project={project} />
+        {project.screenshots?.[0] ? (
+          <figure className="project-preview">
+            <Image
+              src={project.screenshots[0].src}
+              alt={project.screenshots[0].alt}
+              width={project.screenshots[0].width}
+              height={project.screenshots[0].height}
+              sizes="(max-width: 1024px) 100vw, 42vw"
+            />
+            <figcaption>
+              <span>{portfolio.labels.preview}</span>
+              <strong>{project.focus}</strong>
+            </figcaption>
+          </figure>
+        ) : (
+          <ProjectVisual project={project} />
+        )}
       </div>
       <div className="project-card-content">
         <div className="flex flex-wrap items-center gap-3">

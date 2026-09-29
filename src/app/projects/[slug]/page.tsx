@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { portfolio } from "@/data/portfolio";
@@ -145,6 +146,32 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <dd>{project.scope}</dd>
           </div>
         </dl>
+        {project.screenshots?.length ? (
+          <section
+            className="case-gallery"
+            aria-labelledby="project-gallery-title"
+          >
+            <div className="case-gallery-heading">
+              <p className="eyebrow">{portfolio.labels.preview}</p>
+              <h2 id="project-gallery-title">{portfolio.labels.gallery}</h2>
+              <p>{portfolio.labels.galleryIntro}</p>
+            </div>
+            <div className="case-gallery-grid">
+              {project.screenshots.map((screenshot) => (
+                <figure key={screenshot.src}>
+                  <Image
+                    src={screenshot.src}
+                    alt={screenshot.alt}
+                    width={screenshot.width}
+                    height={screenshot.height}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <figcaption>{screenshot.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        ) : null}
         <div className="case-layout">
           <nav className="case-index" aria-label={portfolio.labels.caseIndex}>
             <p className="eyebrow mb-4">{portfolio.labels.caseIndex}</p>

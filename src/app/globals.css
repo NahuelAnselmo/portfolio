@@ -1299,3 +1299,107 @@ button {
     opacity: 1;
   }
 }
+
+.project-preview {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition:
+    box-shadow 280ms ease,
+    transform 280ms ease;
+}
+.project-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--line);
+}
+.project-preview figcaption {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+}
+.project-preview figcaption span {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.project-preview figcaption strong {
+  color: var(--accent);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.project-card:hover .project-preview {
+  box-shadow: var(--shadow-raised);
+  transform: rotate(-0.35deg) scale(1.012);
+}
+.case-gallery {
+  margin-block: clamp(3.5rem, 7vw, 6rem);
+}
+.case-gallery-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.55fr);
+  gap: 1rem 3rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+.case-gallery-heading .eyebrow {
+  grid-column: 1 / -1;
+}
+.case-gallery-heading h2 {
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+.case-gallery-heading > p:last-child {
+  color: var(--muted);
+  line-height: 1.7;
+}
+.case-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.case-gallery-grid figure {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.case-gallery-grid figure:first-child {
+  grid-column: 1 / -1;
+}
+.case-gallery-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--line);
+}
+.case-gallery-grid figcaption {
+  padding: 1rem 1.2rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+@media (max-width: 768px) {
+  .case-gallery-heading,
+  .case-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .case-gallery-grid figure:first-child {
+    grid-column: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-preview {
+    transition: none;
+  }
+  .project-card:hover .project-preview {
+    transform: none;
+  }
+}

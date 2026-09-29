@@ -13,6 +13,13 @@ export type Project = {
   backendRepository?: string;
   tone: "sage" | "sand" | "slate";
   demo?: string;
+  screenshots?: readonly {
+    src: string;
+    alt: string;
+    caption: string;
+    width: number;
+    height: number;
+  }[];
   caseStudy: readonly { title: string; body: string }[];
 };
 
@@ -49,6 +56,9 @@ type PortfolioContent = {
     scope: string;
     flow: string;
     highlights: string;
+    preview: string;
+    gallery: string;
+    galleryIntro: string;
     caseIndex: string;
     projectContact: string;
     nextProject: string;
@@ -143,6 +153,10 @@ export const portfolio: PortfolioContent = {
     scope: "Alcance",
     flow: "Recorrido de la aplicación",
     highlights: "Qué demuestra este proyecto",
+    preview: "Vista del producto",
+    gallery: "El producto en funcionamiento",
+    galleryIntro:
+      "Capturas reales de la aplicación para recorrer sus experiencias principales.",
     caseIndex: "En este caso de estudio",
     projectContact: "Hablemos de este proyecto",
     nextProject: "Seguir explorando",
@@ -286,6 +300,31 @@ export const portfolio: PortfolioContent = {
       backendRepository:
         "https://github.com/NahuelAnselmo/agenda-local-backend",
       demo: "https://agenda-local-web.vercel.app",
+      screenshots: [
+        {
+          src: "/projects/agenda-local/inicio.png",
+          alt: "Página pública de Norte Studio con la presentación del negocio y accesos a la reserva y al panel demo.",
+          caption:
+            "Experiencia pública del negocio y acceso directo a la reserva.",
+          width: 1240,
+          height: 712,
+        },
+        {
+          src: "/projects/agenda-local/reserva.png",
+          alt: "Sección de reserva de Agenda Local con beneficios y selección de servicio.",
+          caption:
+            "Reserva guiada con servicios, profesionales y disponibilidad real.",
+          width: 1440,
+          height: 1039,
+        },
+        {
+          src: "/projects/agenda-local/panel.png",
+          alt: "Panel de Agenda Local con métricas del negocio, navegación y próximos turnos.",
+          caption: "Panel del propietario con métricas y agenda sincronizada.",
+          width: 1440,
+          height: 1000,
+        },
+      ],
       caseStudy: [
         {
           title: "El problema",
